@@ -46,6 +46,7 @@ Please use the below link to see a short video on a complete setup of TAK Server
 
 ## Prerequisites
 
+
 Fetch the dependencies, then clone the git repository and `cd` into the directory
 
 ```bash
@@ -54,6 +55,11 @@ sudo apt install net-tools unzip zip
 git clone https://github.com/Cloud-RF/tak-server.git
 cd tak-server
 ```
+### ZeroTier VPN Integration
+
+Before running the setup, ensure that ZeroTier is installed and connected to your desired network. This is crucial as the setup script auto-detects the first active ZeroTier network interface (ztn) and configures the TAK server accordingly.
+
+To install ZeroTier, follow the instructions at https://www.zerotier.com/download/ and ensure that you are connected to a network before proceeding with the TAK server setup.
 
 ### Setup Docker's apt repository
 
@@ -97,11 +103,6 @@ docker run hello-world
 
 The script will auto-detect your architecture and use the ARM Docker file if the architecture is determined to be `arm64`.
 
-### ZeroTier VPN Integration
-
-Before running the setup, ensure that ZeroTier is installed and connected to your desired network. This is crucial as the setup script auto-detects the first active ZeroTier network interface (ztn) and configures the TAK server accordingly.
-
-To install ZeroTier, follow the instructions at https://www.zerotier.com/download/ and ensure that you are connected to a network before proceeding with the TAK server setup.
 
 ## Installation
 
