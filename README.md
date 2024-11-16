@@ -1,8 +1,10 @@
-# TAK SERVER
+# TAK SERVER over ZEROTIER VPN
 
 ![TAK logo](img/tak.jpg)
 
-This is a Docker wrapper for an official 'OG' TAK server from [TAK Product Center](https://tak.gov/) intended for beginners. It will give you a turnkey TAK server with SSL which works with ATAK, iTAK, WinTAK.
+![ZeroTier Logo](https://www.zerotier.com/wp-content/uploads/2024/04/ZT-Primary-Logo%E2%80%93Gold-White.svg)
+
+This is a Docker wrapper for an official 'OG' TAK server from [TAK Product Center](https://tak.gov/) intended for beginners. This setup integrates ZeroTier VPN for a secure and easily configurable TAK server deployment. It will give you a turnkey TAK server with SSL which works with ATAK, iTAK, WinTAK.
 
 
 ## IMPORTANT: Download the Official TAK Release
@@ -94,6 +96,12 @@ docker run hello-world
 ### AMD64 & ARM64 (Pi4) setup 
 
 The script will auto-detect your architecture and use the ARM Docker file if the architecture is determined to be `arm64`.
+
+### ZeroTier VPN Integration
+
+Before running the setup, ensure that ZeroTier is installed and connected to your desired network. This is crucial as the setup script auto-detects the first active ZeroTier network interface (ztn) and configures the TAK server accordingly.
+
+To install ZeroTier, follow the instructions at https://www.zerotier.com/download/ and ensure that you are connected to a network before proceeding with the TAK server setup.
 
 ## Installation
 
