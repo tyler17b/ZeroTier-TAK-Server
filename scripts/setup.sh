@@ -221,6 +221,17 @@ chown -R $USER:$USER tak
 # This config uses a docker alias of postgresql://tak-database:5432/
 cp ./CoreConfig.xml ./tak/CoreConfig.xml
 
+# Dynamically get the ZeroTier interface
+NIC=$(ip -4 addr | grep -oP '^[0-9]+: \K[^:]+(?=:)' | grep '^ztn' | head -n 1)  # Get the first ZeroTier interface starting with "ztn"
+
+if [ -z "$NIC" ]; then
+    printf $danger "\nNo ZeroTier interface found. Exiting now...\n"
+    exit 1
+fi
+
+# Get the IP address associated with the ZeroTier interface
+IP=$(ip -4 addr show $NIC | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
 ## Set admin username and password and ensure it meets validation criteria
 user="admin"
 pwd=$(cat /dev/urandom | tr -dc '[:alpha:][:digit:]' | fold -w ${1:-11} | head -n 1)
@@ -229,10 +240,6 @@ password=$pwd"Meh1!"
 ## Set postgres password and ensure it meets validation criteria
 pgpwd="$(cat /dev/urandom | tr -dc '[:alpha:][:digit:]' | fold -w ${1:-11} | head -n 1)"
 pgpassword=$pgpwd"Meh1!"
-
-# get IP
-NIC=$(route | grep default | awk '{print $8}' | head -n 1)
-IP=$(ip addr show $NIC | grep -m 1 "inet " | awk '{print $2}' | cut -d "/" -f1)
 
 printf $info "\nProceeding with IP address: $IP\n"
 sed -i "s/password=\".*\"/password=\"${pgpassword}\"/" tak/CoreConfig.xml
