@@ -53,7 +53,7 @@ Fetch the dependencies, then clone the git repository and `cd` into the director
 sudo apt update
 sudo apt install net-tools unzip zip
 git clone https://github.com/tyler17b/ZeroTier-TAK-Server.git
-cd tak-server
+cd ZeroTier-TAK-Server
 ```
 ### ZeroTier VPN Integration
 
